@@ -47,12 +47,52 @@
 // document.write("<br>")
 // document.write(!(x==y))
 
-let p = document.querySelector("p")
-let button = document.querySelector("button")
-let input = document.querySelector("input")
-button.addEventListener('click', function()
-{
-    let isi = input.value
-    console.log(isi)
-    p.innerHTML = isi
-})
+// let p = document.querySelector("p")
+// let button = document.querySelector("button")
+// let input = document.querySelector("input")
+// button.addEventListener('click', function()
+// {
+//     let isi = input.value
+//     console.log(isi)
+//     p.innerHTML = isi
+// })
+
+const inputList = document.getElementById("input-list");
+const listInput = document.getElementById("list");
+
+function tambah() {
+    if (inputList.value === "") {
+        alert("jangan biarkan kosong!!!");
+    } else {
+        let li = document.createElement("li");
+        let checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.className = "daftar-list";
+        li.appendChild(checkbox);
+        let namaTugas = document.createTextNode(inputList.value);
+        li.appendChild(namaTugas);
+
+        let tombolHapus = document.createElement("button");
+        tombolHapus.textContent = "x";
+        tombolHapus.className = "tombol-hapus"
+        li.appendChild(tombolHapus);
+
+        inputList.value = "";
+        li.style.listStyleType = "none";
+        tombolHapus.style.listStyleType = "none";
+
+        tombolHapus.addEventListener("click", function () {
+            li.remove();
+        });
+
+        checkbox.addEventListener("change", function() {
+            if (checkbox.checked) {
+                li.style.textDecoration = "line-through";
+            } else {
+                li.style.textDecoration = "none";
+            }
+        });
+
+        listInput.appendChild(li);
+    }
+}
